@@ -34,6 +34,7 @@
 #include "node_providers/vfolder.h"
 #include "node_provider.h"
 #include "node_source.h" 
+#include "node_sources/default_source.h"
 #include "update.h"
 #include "ui/feed_list_view.h"
 
@@ -349,7 +350,11 @@ feedlist_init (FeedList *fl)
 	feedlist_foreach (feedlist_init_node);
 	feedlist_flush_pending_node_recounts ();
 
-	/* 4. Finally save the new feed list state (to persist migration 
+	/* 4. Perform initial feed update. */
+	debug (DEBUG_UPDATE, "Performing initial feed update");
+	default_source_start_updating (ROOTNODE);
+
+	/* 5. Finally save the new feed list state (to persist migration
 	      related feed drops or initial default feed list import) */
 	feedlist->loading = FALSE;
 	feedlist_schedule_save ();

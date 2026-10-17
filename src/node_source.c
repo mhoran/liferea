@@ -167,10 +167,7 @@ node_source_setup_root (void)
 	root->source->type = default_source_get_type ();
 	node_source_import_feedlist (root);
 
-	/* 4. Start updating*/
-	default_source_start_updating (root);
-
-	/* 5. Purge old nodes from the database 
+	/* 4. Purge old nodes from the database
 
 	   This relies on node_source_import_feedlist (root) above to be
 	   synchronous about loading the previous state of all node sources 
